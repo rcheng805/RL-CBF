@@ -20,6 +20,7 @@ def main():
     parser.add_argument('--hidden_size', type=int, default=64)
     parser.add_argument('--max_path_length', type=int, default=300)
     parser.add_argument('--total_train_step', type=int, default=1.8e6)
+    parser.add_argument('--name', type=str, default='data_')
     args = parser.parse_args()
     
     #Set up tensorflow to use GPU

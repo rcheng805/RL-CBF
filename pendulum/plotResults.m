@@ -70,7 +70,36 @@ reward_mean_trpo_cbf = movmean(mean([reward_1; reward_2; reward_3; ...
 reward_std_trpo_cbf = movmean(std([reward_1; reward_2; reward_3; ...
     reward_4]), N1);
 
+
+
+%% Load TRPO Data
 clear data reward_1 reward_2 reward_3 reward_4
+dinfo = dir('TRPO/*.mat');
+simdata = cell(length(dinfo),1);
+reward = cell(length(dinfo),1);
+reward_movmean = cell(length(dinfo),1);
+for j = 1:length(dinfo)
+    thisfilename = dinfo(j).name;  %just the name
+    simdata{j} = load(thisfilename); %load just this file    
+    reward{j} = zeros(length(simdata{j}));
+    for i = 1:length(simdata{j}.data)
+        reward{j}(i) = sum(simdata{j}.data{i}.Reward)/18;
+    end
+    reward_movmean{j} = movmean(reward{j},N);
+end
+reward_array = zeros(length(dinfo),length(reward_movmean{j}));
+for j = 1:length(dinfo)
+    reward_array(j,:) = reward_movmean{j};
+end
+reward_mean_trpo = movmean(mean(reward_array), N1);
+reward_std_trpo = movmean(std(reward_array), N1);
+
+% Plot TRPO Reward
+figure;
+hold on
+plot(0,0,'r'); plot(0,0,'b--');
+shadedErrorBar(1:length(reward_mean_trpo), reward_mean_trpo, reward_std_trpo,'lineProps','b--')
+
 load('TRPO/data1_19-02-08-01-52')
 for i = 1:length(data)
     reward_1(i) = sum(data{i}.Reward)/18;
