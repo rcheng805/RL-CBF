@@ -1,0 +1,10 @@
+session_name: bintel_sitl_session
+suppress_history: false
+windows:
+  - window_name: bintel_sitl
+    layout: tiled
+    panes:
+      - python main.py
+      - python main.py
+      - python main.py
+      - python main.py
