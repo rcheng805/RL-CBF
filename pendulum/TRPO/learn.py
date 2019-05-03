@@ -37,6 +37,6 @@ class LEARNER():
 
             if total_steps > self.args.total_train_step:
                 #nn_weights = {'policy_network': self.agent.get_value(), 'advantage_network': self.agent.gae.get_value()}
-                savemat('data4_' + datetime.datetime.now().strftime("%y-%m-%d-%H-%M") + '.mat',dict(data=all_logs, args=self.args))
+                savemat(self.args.name + datetime.datetime.now().strftime("%y-%m-%d-%H-%M") + '.mat',dict(data=all_logs, args=self.args))
                 #savemat('weights_' + datetime.datetime.now().strftime("%y-%m-%d-%H-%M") + '.mat',dict(policy_weights=nn_weights, args=self.args))
                 break

@@ -1,0 +1,10 @@
+session_name: bintel_sitl_session
+suppress_history: false
+windows:
+  - window_name: bintel_sitl
+    layout: tiled
+    panes:
+      - python main.py --name 'data_1_'
+      - python main.py --name 'data_2_' 
+      - python main.py --name 'data_3_' 
+      - python main.py --name 'data_4_' 
